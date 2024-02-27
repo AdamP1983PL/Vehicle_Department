@@ -24,6 +24,32 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(RegistrationNumberAlreadyExistsException.class)
+    public ResponseEntity<ErrorDetails> handleRegistrationNumberAlreadyExistsException(
+            RegistrationNumberAlreadyExistsException exception, WebRequest webRequest) {
 
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(LocalDateTime.now())
+                .message(exception.getMessage())
+                .path(webRequest.getDescription(false))
+                .errorCode("REGISTRATION_NUMBER_ALREADY_EXISTS")
+                .build();
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(VINAlreadyExistsException.class)
+    public ResponseEntity<ErrorDetails> handleVINAlreadyExistsException(VINAlreadyExistsException exception,
+                                                                        WebRequest webRequest) {
+
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .timestamp(LocalDateTime.now())
+                .message(exception.getMessage())
+                .path(webRequest.getDescription(false))
+                .errorCode("VIN_ALREADY_EXISTS_EXCEPTION")
+                .build();
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 
 }
