@@ -29,6 +29,7 @@ public class VehicleThymeleafController {
     public String listAllVehicles(Model model) {
         List<VehicleDto> vehicleDtoList = vehicleServiceImpl.findAllVehicles();
         model.addAttribute("vehicleDtoList", vehicleDtoList);
+        log.info("====>>>> listAllVehicles() execution");
         return "vehicle-list";
     }
 
@@ -36,19 +37,20 @@ public class VehicleThymeleafController {
     public String addVehicle(Model model) {
         VehicleDto vehicleDto = new VehicleDto();
         model.addAttribute("vehicleDto", vehicleDto);
+        log.info("====>>>> addVehicle() execution");
         return "add-new-vehicle";
     }
 
     @PostMapping("/save-new-vehicle")
     public String saveNewVehicle(@Valid @ModelAttribute("vehicleDto") VehicleDto vehicleDto,
-                                 BindingResult result,
-                                 Model model) {
+                                 BindingResult result, Model model) {
         if(result.hasErrors()) {
             model.addAttribute("vehicleDto", vehicleDto);
             return "add-new-vehicle";
         }
 
         vehicleServiceImpl.createVehicle(vehicleDto);
+        log.info("====>>>> saveNewVehicle() execution");
         return "redirect:/api/vehicle/frontend/";
     }
 
@@ -56,7 +58,30 @@ public class VehicleThymeleafController {
     public String listVehicleDetails(@PathVariable("registration") String registration, Model model) {
         VehicleDto vehicleDetails = vehicleServiceImpl.findVehicleByRegistrationNumber(registration);
         model.addAttribute("vehicleDetails", vehicleDetails);
+        log.info("====>>>> listVehicleDetails() execution");
         return "vehicle-details";
+    }
+
+    @GetMapping("/edit/{registration}")
+    public String editVehicle(@PathVariable("registration") String registration, Model model) {
+        VehicleDto vehicleDto = vehicleServiceImpl.findVehicleByRegistrationNumber(registration);
+        model.addAttribute("vehicleDto", vehicleDto);
+        log.info("====>>>> editVehicle() execution");
+        return "edit-vehicle";
+    }
+
+    @PostMapping("/update/{registration}")
+    public String updateVehicle(@PathVariable("registration") String registration,
+                                @Valid @ModelAttribute("vehicleDto") VehicleDto vehicleDto,
+                                BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("vehicleDto", vehicleDto);
+            return "edit-vehicle";
+        }
+        vehicleDto.setRegistrationNumber(registration);
+        vehicleServiceImpl.mvcUpdateVehicle(vehicleDto);
+        log.info("====>>>> updateVehicle() execution");
+        return "redirect:/api/vehicle/frontend/";
     }
 
 }

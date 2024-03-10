@@ -88,6 +88,12 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
+    public void mvcUpdateVehicle(VehicleDto vehicleDto) {
+        log.info("====>>>> mvcUpdateVehicle() execution.");
+        vehicleRepository.save(vehicleMapper.mapToVehicle(vehicleDto));
+    }
+
+    @Override
     public void deleteVehicleByRegistrationNumber(String registrationNumber) {
         Vehicle vehicle = vehicleRepository.findVehicleByRegistrationNumber(registrationNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "Registration Number", registrationNumber));

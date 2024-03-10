@@ -16,6 +16,8 @@ public interface VehicleService {
 
     VehicleDto updateVehicle(VehicleDto vehicleDto, String registrationNumber);
 
+    void mvcUpdateVehicle(VehicleDto vehicleDto);
+
     void deleteVehicleByRegistrationNumber(String registrationNumber);
 
 }

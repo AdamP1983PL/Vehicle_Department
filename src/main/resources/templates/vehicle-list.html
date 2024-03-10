@@ -48,13 +48,13 @@
                    class="btn btn-primary btn-sm">Details</a>
             </td>
             <td class="text-center">
-<!--                <a th:href=""
-                   class="btn btn-primary btn-sm">Edit</a>-->
+                <a th:href="@{/api/vehicle/frontend/edit/{registration}(registration=${vehicle.registrationNumber})}"
+                   class="btn btn-primary btn-sm">Edit</a>
             </td>
             <td class="text-center">
-<!--                <a th:href=""-->
-<!--                   class="btn btn-danger btn-sm"-->
-<!--                   onclick="if (!(confirm('Delete this employee?'))) return false">Delete</a>-->
+                <!--                <a th:href=""-->
+                <!--                   class="btn btn-danger btn-sm"-->
+                <!--                   onclick="if (!(confirm('Delete this employee?'))) return false">Delete</a>-->
             </td>
         </tr>
         </tbody>
