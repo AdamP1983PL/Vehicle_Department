@@ -52,4 +52,11 @@ public class VehicleThymeleafController {
         return "redirect:/api/vehicle/frontend/";
     }
 
+    @GetMapping("/details/registration/{registration}")
+    public String listVehicleDetails(@PathVariable("registration") String registration, Model model) {
+        VehicleDto vehicleDetails = vehicleServiceImpl.findVehicleByRegistrationNumber(registration);
+        model.addAttribute("vehicleDetails", vehicleDetails);
+        return "vehicle-details";
+    }
+
 }

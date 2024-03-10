@@ -43,8 +43,9 @@
             <td th:text="*{gearboxType}"></td>
             <td th:text="*{additionalInformation}"></td>
             <td class="text-center">
-<!--                <a th:href=""-->
-<!--                   class="btn btn-primary btn-sm">Details</a>-->
+                <a th:href="@{/api/vehicle/frontend/details/registration/{registration}
+                  (registration=${vehicle.registrationNumber})}"
+                   class="btn btn-primary btn-sm">Details</a>
             </td>
             <td class="text-center">
 <!--                <a th:href=""
