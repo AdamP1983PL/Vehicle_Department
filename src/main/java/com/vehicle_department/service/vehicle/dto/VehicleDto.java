@@ -23,3 +23,6 @@ public class VehicleDto {
     private String additionalInformation;
 
 }
+
+// todo add validation
+// todo add swagger documentation

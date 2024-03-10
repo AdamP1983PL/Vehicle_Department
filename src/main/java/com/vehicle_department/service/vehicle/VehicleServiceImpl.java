@@ -25,7 +25,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<VehicleDto> findAllVehicles() {
-        log.info("====>>>> VehicleServiceImpl -> findAllVehicles() execution.");
+        log.info("====>>>> findAllVehicles() execution.");
         return vehicleRepository.findAll().stream()
                 .map(vehicleMapper::mapToVehicleDto)
                 .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class VehicleServiceImpl implements VehicleService {
         Vehicle vehicle = vehicleRepository.findVehicleByVehicleIdentificationNumber(vin)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "VIN number", vin));
 
-        log.info("====>>>> VehicleServiceImpl -> findVehicleByVINNumber(" + vin + ") execution.");
+        log.info("====>>>> findVehicleByVINNumber(" + vin + ") execution.");
         return vehicleMapper.mapToVehicleDto(vehicle);
     }
 
@@ -45,7 +45,7 @@ public class VehicleServiceImpl implements VehicleService {
         Vehicle vehicle = vehicleRepository.findVehicleByRegistrationNumber(registrationNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "Registration Number", registrationNumber));
 
-        log.info("====>>>> VehicleServiceImpl -> findVehicleByRegistrationNumber(" + registrationNumber + ") execution.");
+        log.info("====>>>> findVehicleByRegistrationNumber(" + registrationNumber + ") execution.");
         return vehicleMapper.mapToVehicleDto(vehicle);
     }
 
@@ -64,7 +64,7 @@ public class VehicleServiceImpl implements VehicleService {
         }
 
         Vehicle savedVehicle = vehicleRepository.save(vehicleMapper.mapToVehicle(vehicleDto));
-        log.info("====>>>> VehicleServiceImpl -> createVehicle() execution.");
+        log.info("====>>>> createVehicle() execution.");
         return vehicleMapper.mapToVehicleDto(savedVehicle);
     }
 
@@ -83,7 +83,7 @@ public class VehicleServiceImpl implements VehicleService {
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "Registration Number", registrationNumber));
 
-        log.info("====>>>> VehicleServiceImpl -> updateVehicle(" + registrationNumber + ") execution.");
+        log.info("====>>>> updateVehicle(" + registrationNumber + ") execution.");
         return vehicleMapper.mapToVehicleDto(vehicle);
     }
 
@@ -92,7 +92,7 @@ public class VehicleServiceImpl implements VehicleService {
         Vehicle vehicle = vehicleRepository.findVehicleByRegistrationNumber(registrationNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "Registration Number", registrationNumber));
 
-        log.info("====>>>> VehicleServiceImpl -> deleteVehicleByRegistrationNumber(" + registrationNumber + ") execution.");
+        log.info("====>>>> deleteVehicleByRegistrationNumber(" + registrationNumber + ") execution.");
         vehicleRepository.delete(vehicle);
     }
 }
