@@ -84,4 +84,11 @@ public class VehicleThymeleafController {
         return "redirect:/api/vehicle/frontend/";
     }
 
+    @GetMapping("/delete/{registration}")
+    public String deleteVehicle(@PathVariable("registration") String registration) {
+        log.info("====>>>> deleteVehicle(" + registration + ") execution");
+        vehicleServiceImpl.deleteVehicleByRegistrationNumber(registration);
+        return "redirect:/api/vehicle/frontend/";
+    }
+
 }
