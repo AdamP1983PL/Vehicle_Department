@@ -17,5 +17,4 @@ public class VehicleDepartmentApplication {
 
 }
 
-// todo add validation
-// todo OpenFeign
+
