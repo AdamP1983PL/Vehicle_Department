@@ -70,7 +70,7 @@ public class VehicleThymeleafController {
         return "edit-vehicle";
     }
 
-    @PostMapping("/update/{registration}")
+    @PutMapping("/update/{registration}")
     public String updateVehicle(@PathVariable("registration") String registration,
                                 @Valid @ModelAttribute("vehicleDto") VehicleDto vehicleDto,
                                 BindingResult result, Model model) {

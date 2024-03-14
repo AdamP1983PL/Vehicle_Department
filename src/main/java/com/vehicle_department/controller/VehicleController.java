@@ -13,40 +13,39 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/vehicle")
 public class VehicleController {
 
     private VehicleServiceImpl vehicleServiceImpl;
 
-    @GetMapping("/")
+    @GetMapping("/api/vehicle/")
     public ResponseEntity<List<VehicleDto>> findAllVehicles() {
         List<VehicleDto> vehicleDtoList = vehicleServiceImpl.findAllVehicles();
         log.info("====>>>> findAllVehicles() execution");
         return new ResponseEntity<>(vehicleDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/vin/{vin}")
+    @GetMapping("/api/vehicle/vin/{vin}")
     public ResponseEntity<VehicleDto> findVehicleByVIN(@PathVariable("vin") String vin) {
         VehicleDto vehicleDto = vehicleServiceImpl.findVehicleByVIN(vin);
         log.info("====>>>> findVehicleByVIN(" + vin + ") execution.");
         return new ResponseEntity<>(vehicleDto, HttpStatus.OK);
     }
 
-    @GetMapping("/reg-num/{number}")
+    @GetMapping("/api/vehicle/reg-num/{number}")
     public ResponseEntity<VehicleDto> findVehicleByRegistrationNumber(@PathVariable("number") String number) {
         VehicleDto vehicleDto = vehicleServiceImpl.findVehicleByRegistrationNumber(number);
         log.info("====>>>> findVehicleByRegistrationNumber(" + number + ") execution.");
         return new ResponseEntity<>(vehicleDto, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/api/vehicle/")
     public ResponseEntity<VehicleDto> createVehicle(@RequestBody VehicleDto vehicleDto) {
         VehicleDto createdVehicleDto = vehicleServiceImpl.createVehicle(vehicleDto);
         log.info("====>>>> createVehicle() execution.");
         return new ResponseEntity<>(createdVehicleDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{number}")
+    @PutMapping("/api/vehicle/{number}")
     public ResponseEntity<VehicleDto> updateVehicle(@RequestBody VehicleDto vehicleDto,
                                                     @PathVariable("number") String number) {
         VehicleDto updatedVehicleDto = vehicleServiceImpl.updateVehicle(vehicleDto, number);
@@ -54,7 +53,7 @@ public class VehicleController {
         return new ResponseEntity<>(updatedVehicleDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{number}")
+    @DeleteMapping("/api/vehicle/{number}")
     public ResponseEntity<Void> deleteVehicleByRegistrationNumber(@PathVariable("number") String number) {
         vehicleServiceImpl.deleteVehicleByRegistrationNumber(number);
         log.info("====>>>> deleteVehicleByRegistrationNumber(" + number + ") execution.");

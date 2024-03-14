@@ -4,6 +4,8 @@ import com.vehicle_department.model.enums.EngineType;
 import com.vehicle_department.model.enums.GearboxType;
 import lombok.*;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -29,7 +31,9 @@ public class VehicleDto {
     private String productionYear;
     @Min(0)
     private double mileage;
+    @Enumerated(EnumType.STRING)
     private EngineType engineType;
+    @Enumerated(EnumType.STRING)
     private GearboxType gearboxType;
     @Size(max = 255)
     private String additionalInformation;
