@@ -13,15 +13,23 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @RestController
+//@RequestMapping("/api/vehicle")
 public class VehicleController {
 
     private VehicleServiceImpl vehicleServiceImpl;
 
-    @GetMapping("/api/vehicle/")
+    @GetMapping("/api/vehicle")
     public ResponseEntity<List<VehicleDto>> findAllVehicles() {
         List<VehicleDto> vehicleDtoList = vehicleServiceImpl.findAllVehicles();
         log.info("====>>>> findAllVehicles() execution");
         return new ResponseEntity<>(vehicleDtoList, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/vehicle/id/{id}")
+    public ResponseEntity<VehicleDto> findVehicleById(@PathVariable("id") Long id) {
+        VehicleDto vehicleDto = vehicleServiceImpl.findVehicleById(id);
+        log.info("====>>>> findVehicleById(" + id + ") execution.");
+        return new ResponseEntity<>(vehicleDto, HttpStatus.OK);
     }
 
     @GetMapping("/api/vehicle/vin/{vin}")
@@ -49,11 +57,12 @@ public class VehicleController {
     public ResponseEntity<VehicleDto> updateVehicle(@RequestBody VehicleDto vehicleDto,
                                                     @PathVariable("number") String number) {
         VehicleDto updatedVehicleDto = vehicleServiceImpl.updateVehicle(vehicleDto, number);
-        log.info("====>>>> updateVehicle(" + number + ") execution.");
+        log.info("====>>>> updateVehicle(registration: " + number + ") execution.");
         return new ResponseEntity<>(updatedVehicleDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/vehicle/{number}")
+    // todo here added /delete
+    @DeleteMapping("/api/vehicle/delete/{number}")
     public ResponseEntity<Void> deleteVehicleByRegistrationNumber(@PathVariable("number") String number) {
         vehicleServiceImpl.deleteVehicleByRegistrationNumber(number);
         log.info("====>>>> deleteVehicleByRegistrationNumber(" + number + ") execution.");

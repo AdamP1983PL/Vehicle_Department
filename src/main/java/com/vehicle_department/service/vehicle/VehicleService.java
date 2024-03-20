@@ -8,6 +8,8 @@ public interface VehicleService {
 
     List<VehicleDto> findAllVehicles();
 
+    VehicleDto findVehicleById(Long id);
+
     VehicleDto findVehicleByVIN(String vin);
 
     VehicleDto findVehicleByRegistrationNumber(String registrationNumber);

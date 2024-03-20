@@ -17,16 +17,18 @@
                   (registration=${vehicleDetails.registrationNumber})}"
                   th:object="${vehicleDetails}">
                 <h5>
-                    <p>Id:<span th:text="${vehicleDetails.id}"></span></p>
-                    <p>Registration number:<span th:text="${vehicleDetails.registrationNumber}"></span></p>
-                    <p>VIN:<span th:text="${vehicleDetails.vehicleIdentificationNumber}"></span></p>
-                    <p>Manufacturer:<span th:text="${vehicleDetails.manufacturer}"></span></p>
-                    <p>Model:<span th:text="${vehicleDetails.model}"></span></p>
-                    <p>Production Year:<span th:text="${vehicleDetails.productionYear}"></span></p>
-                    <p>Mileage:<span th:text="${vehicleDetails.mileage}"></span></p>
-                    <p>Engine Type:<span th:text="${vehicleDetails.engineType}"></span></p>
-                    <p>GearboxType:<span th:text="${vehicleDetails.gearboxType}"></span></p>
-                    <p>Additional Information::<span th:text="${vehicleDetails.additionalInformation}"></span></p>
+                    <th:block>
+                        Id: <span th:text="${vehicleDetails.id}"></span><br>
+                        Registration number: <span th:text="${vehicleDetails.registrationNumber}"></span><br>
+                        VIN: <span th:text="${vehicleDetails.vehicleIdentificationNumber}"></span><br>
+                        Manufacturer: <span th:text="${vehicleDetails.manufacturer}"></span><br>
+                        Model: <span th:text="${vehicleDetails.model}"></span><br>
+                        Production Year: <span th:text="${vehicleDetails.productionYear}"></span><br>
+                        Mileage: <span th:text="${vehicleDetails.mileage}"></span><br>
+                        Engine Type: <span th:text="${vehicleDetails.engineType}"></span><br>
+                        Gearbox Type: <span th:text="${vehicleDetails.gearboxType}"></span><br>
+                        Additional Information: <span th:text="${vehicleDetails.additionalInformation}"></span><br>
+                    </th:block>
                 </h5>
             </form>
             <div class="mb-3">
