@@ -112,4 +112,5 @@ public class VehicleServiceImpl implements VehicleService {
         vehicleRepository.delete(vehicle);
         log.info("====>>>> deleteVehicleByRegistrationNumber(" + registrationNumber + ") execution.");
     }
+
 }

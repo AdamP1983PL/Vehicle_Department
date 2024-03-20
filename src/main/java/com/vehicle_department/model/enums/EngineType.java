@@ -1,8 +1,6 @@
 package com.vehicle_department.model.enums;
 
-import lombok.Getter;
 
-@Getter
 public enum EngineType {
     UNKNOWN("UNKNOWN"),
     DIESEL("DIESEL"),
@@ -16,4 +14,7 @@ public enum EngineType {
         this.displayText = displayText;
     }
 
+    public String getDisplayText() {
+        return displayText;
+    }
 }

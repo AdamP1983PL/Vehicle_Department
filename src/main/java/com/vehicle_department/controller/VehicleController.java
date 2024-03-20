@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@AllArgsConstructor
 @RestController
-//@RequestMapping("/api/vehicle")
 public class VehicleController {
 
-    private VehicleServiceImpl vehicleServiceImpl;
+    private final VehicleServiceImpl vehicleServiceImpl;
+
+    public VehicleController(VehicleServiceImpl vehicleServiceImpl) {
+        this.vehicleServiceImpl = vehicleServiceImpl;
+    }
 
     @GetMapping("/api/vehicle")
     public ResponseEntity<List<VehicleDto>> findAllVehicles() {

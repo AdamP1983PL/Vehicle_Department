@@ -14,11 +14,14 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@AllArgsConstructor
 @RequestMapping("/api/vehicle/frontend")
 public class VehicleThymeleafController {
 
-    private VehicleServiceImpl vehicleServiceImpl;
+    private final VehicleServiceImpl vehicleServiceImpl;
+
+    public VehicleThymeleafController(VehicleServiceImpl vehicleServiceImpl) {
+        this.vehicleServiceImpl = vehicleServiceImpl;
+    }
 
     @GetMapping("/home")
     public String showHomePage() {
