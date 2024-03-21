@@ -33,9 +33,11 @@ public class Vehicle {
     private double mileage;
 
     @Column(name = "ENGINE_TYPE", nullable = false)
+    @Enumerated(EnumType.STRING)
     private EngineType engineType;
 
     @Column(name = "GEARBOX_TYPE", nullable = false)
+    @Enumerated(EnumType.STRING)
     private GearboxType gearboxType;
 
     @Column(name = "ADDITIONAL_INFO")

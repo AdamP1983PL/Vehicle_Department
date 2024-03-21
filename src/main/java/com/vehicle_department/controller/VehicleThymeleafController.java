@@ -60,7 +60,7 @@ public class VehicleThymeleafController {
     public String listVehicleDetails(@PathVariable("registration") String registration, Model model) {
         VehicleDto vehicleDetails = vehicleServiceImpl.findVehicleByRegistrationNumber(registration);
         model.addAttribute("vehicleDetails", vehicleDetails);
-        log.info("====>>>> listVehicleDetails() execution");
+        log.info("====>>>> listVehicleDetails(registration: " + registration + ") execution");
         return "vehicle-details";
     }
 

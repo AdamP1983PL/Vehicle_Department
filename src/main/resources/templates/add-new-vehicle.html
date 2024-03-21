@@ -14,7 +14,6 @@
         <div class="card-body">
             <form action="#" method="post" role="form"
                   th:action="@{/api/vehicle/frontend/save-new-vehicle}" th:object="${vehicleDto}">
-
                 <div class="form-group mb-3">
                     <label for="registrationNumber" class="form-label">Registration Number</label>
                     <input class="form-control" th:field="*{registrationNumber}"
@@ -90,6 +89,7 @@
                     <button class="btn btn-primary" type="submit">Save Vehicle</button>
                 </div>
             </form>
+            <hr>
             <div class="mb-3">
                 <h5>
                     <a th:href="@{/api/vehicle/frontend/}">Proceed to Vehicle List</a>
