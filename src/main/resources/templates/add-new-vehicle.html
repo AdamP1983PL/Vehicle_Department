@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             <form action="#" method="post" role="form"
-                  th:action="@{/api/vehicle/frontend/save-new-vehicle}" th:object="${vehicleDto}">
+                  th:action="@{/vehicles/save-new-vehicle}" th:object="${vehicleDto}">
                 <div class="form-group mb-3">
                     <label for="registrationNumber" class="form-label">Registration Number</label>
                     <input class="form-control" th:field="*{registrationNumber}"
@@ -92,12 +92,12 @@
             <hr>
             <div class="mb-3">
                 <h5>
-                    <a th:href="@{/api/vehicle/frontend/}">Proceed to Vehicle List</a>
+                    <a th:href="@{/vehicles}">Proceed to Vehicle List</a>
                 </h5>
             </div>
             <div class="mb-3">
                 <h5>
-                    <a th:href="@{/api/vehicle/frontend/home}">Back to Home</a>
+                    <a href="">Back to Home</a>
                 </h5>
             </div>
         </div>

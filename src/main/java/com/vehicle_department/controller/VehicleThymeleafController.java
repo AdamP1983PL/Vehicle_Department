@@ -14,7 +14,8 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/api/vehicle/frontend")
+//@RequestMapping("/api/vehicle/frontend")
+@RequestMapping("/vehicles")
 public class VehicleThymeleafController {
 
     private final VehicleServiceImpl vehicleServiceImpl;
@@ -28,7 +29,7 @@ public class VehicleThymeleafController {
         return "index";
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String listAllVehicles(Model model) {
         List<VehicleDto> vehicleDtoList = vehicleServiceImpl.findAllVehicles();
         model.addAttribute("vehicleDtoList", vehicleDtoList);
@@ -53,7 +54,7 @@ public class VehicleThymeleafController {
         }
         vehicleServiceImpl.createVehicle(vehicleDto);
         log.info("====>>>> saveNewVehicle() execution");
-        return "redirect:/api/vehicle/frontend/";
+        return "redirect:/vehicles/frontend/";
     }
 
     @GetMapping("/details/registration/{registration}")
@@ -72,7 +73,7 @@ public class VehicleThymeleafController {
         return "edit-vehicle";
     }
 
-    @PutMapping("/update/{registration}")
+    @PostMapping("/update/{registration}")
     public String updateVehicle(@PathVariable("registration") String registration,
                                 @Valid @ModelAttribute("vehicleDto") VehicleDto vehicleDto,
                                 BindingResult result, Model model) {
@@ -83,14 +84,14 @@ public class VehicleThymeleafController {
         vehicleDto.setRegistrationNumber(registration);
         vehicleServiceImpl.mvcUpdateVehicle(vehicleDto);
         log.info("====>>>> updateVehicle() execution");
-        return "redirect:/api/vehicle/frontend/";
+        return "redirect:/vehicles";
     }
 
     @GetMapping("/delete/{registration}")
     public String deleteVehicle(@PathVariable("registration") String registration) {
         vehicleServiceImpl.deleteVehicleByRegistrationNumber(registration);
         log.info("====>>>> deleteVehicle(" + registration + ") execution");
-        return "redirect:/api/vehicle/frontend/";
+        return "redirect:/vehicles";
     }
 
 }
