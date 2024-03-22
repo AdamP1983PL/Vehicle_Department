@@ -7,7 +7,6 @@ import com.vehicle_department.model.vehicle.domain.Vehicle;
 import com.vehicle_department.model.vehicle.repository.VehicleRepository;
 import com.vehicle_department.service.vehicle.dto.VehicleDto;
 import com.vehicle_department.service.vehicle.mapper.VehicleMapper;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +16,15 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 public class VehicleServiceImpl implements VehicleService {
 
-    private VehicleRepository vehicleRepository;
-    private VehicleMapper vehicleMapper;
+    private final VehicleRepository vehicleRepository;
+    private final VehicleMapper vehicleMapper;
+
+    public VehicleServiceImpl(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper) {
+        this.vehicleRepository = vehicleRepository;
+        this.vehicleMapper = vehicleMapper;
+    }
 
     @Override
     public List<VehicleDto> findAllVehicles() {
@@ -29,6 +32,14 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleRepository.findAll().stream()
                 .map(vehicleMapper::mapToVehicleDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public VehicleDto findVehicleById(Long id) {
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "id", Long.toString(id)));
+        log.info("====>>>> findVehicleById(" + id + ") execution.");
+        return vehicleMapper.mapToVehicleDto(vehicle);
     }
 
     @Override
@@ -88,11 +99,18 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
+    public void mvcUpdateVehicle(VehicleDto vehicleDto) {
+        log.info("====>>>> mvcUpdateVehicle() execution.");
+        vehicleRepository.save(vehicleMapper.mapToVehicle(vehicleDto));
+    }
+
+    @Override
     public void deleteVehicleByRegistrationNumber(String registrationNumber) {
         Vehicle vehicle = vehicleRepository.findVehicleByRegistrationNumber(registrationNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Vehicle", "Registration Number", registrationNumber));
 
-        log.info("====>>>> deleteVehicleByRegistrationNumber(" + registrationNumber + ") execution.");
         vehicleRepository.delete(vehicle);
+        log.info("====>>>> deleteVehicleByRegistrationNumber(" + registrationNumber + ") execution.");
     }
+
 }

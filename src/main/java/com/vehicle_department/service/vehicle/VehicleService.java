@@ -8,6 +8,8 @@ public interface VehicleService {
 
     List<VehicleDto> findAllVehicles();
 
+    VehicleDto findVehicleById(Long id);
+
     VehicleDto findVehicleByVIN(String vin);
 
     VehicleDto findVehicleByRegistrationNumber(String registrationNumber);
@@ -16,8 +18,10 @@ public interface VehicleService {
 
     VehicleDto updateVehicle(VehicleDto vehicleDto, String registrationNumber);
 
+    void mvcUpdateVehicle(VehicleDto vehicleDto);
+
     void deleteVehicleByRegistrationNumber(String registrationNumber);
 
 }
 
-// todo pagination and  sorting
+

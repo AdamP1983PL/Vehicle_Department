@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="~{fragments/head-content :: head-content}"></div>
+</head>
+<body>
+<nav th:replace="~{fragments/navigation :: nav}"></nav>
+<br>
+<div class="container row col-md-6 offset-md-3">
+  <div class="card">
+    <div class="card-header">
+      <h4>Edit Vehicle</h4>
+    </div>
+    <div class="card-body">
+      <form action="#" method="post" role="form"
+            th:action="@{/vehicles/update/{registration}(registration=${vehicleDto.registrationNumber})}"
+            th:object="${vehicleDto}">
+        <div class="">
+          <input class="form-control" th:field="*{id}"
+                 type="hidden" id="id" name="id">
+        </div>
+        <div class="">
+          <input class="form-control" th:field="*{registrationNumber}"
+                 type="hidden" id="registrationNumber" name="registrationNumber">
+        </div>
+<!--        <div class="form-group mb-3">-->
+<!--          <label for="registrationNumber" class="form-label">Registration Number</label>-->
+<!--          <input class="form-control" th:field="*{registrationNumber}"-->
+<!--                 type="text" id="registrationNumber" name="registrationNumber"-->
+<!--                 placeholder="Enter Registration Number">-->
+<!--          <p th:if="${#fields.hasErrors('registrationNumber')}" class="text-danger"-->
+<!--             th:errors="*{registrationNumber}"></p>-->
+<!--        </div>-->
+        <div class="form-group mb-3">
+          <label for="vehicleIdentificationNumber" class="form-label">VIN Number</label>
+          <input class="form-control" th:field="*{vehicleIdentificationNumber}"
+                 type="text" id="vehicleIdentificationNumber" name="vehicleIdentificationNumber"
+                 placeholder="Enter VIN Number">
+          <p th:if="${#fields.hasErrors('vehicleIdentificationNumber')}" class="text-danger"
+             th:errors="*{vehicleIdentificationNumber}"></p>
+        </div>
+        <div class="form-group mb-3">
+          <label for="manufacturer" class="form-label">Manufacturer</label>
+          <input class="form-control" th:field="*{manufacturer}"
+                 type="text" id="manufacturer" name="manufacturer" placeholder="Enter Manufacturer">
+          <p th:if="${#fields.hasErrors('manufacturer')}" class="text-danger" th:errors="*{manufacturer}"></p>
+        </div>
+        <div class="form-group mb-3">
+          <label for="model" class="form-label">Model</label>
+          <input class="form-control" th:field="*{model}"
+                 type="text" id="model" name="model" placeholder="Enter Model">
+          <p th:if="${#fields.hasErrors('model')}" class="text-danger" th:errors="*{model}"></p>
+        </div>
+        <div class="form-group mb-3">
+          <label for="productionYear" class="form-label">Production Year</label>
+          <input class="form-control" th:field="*{productionYear}"
+                 type="text" id="productionYear" name="productionYear" placeholder="Enter Production Year">
+          <p th:if="${#fields.hasErrors('productionYear')}" class="text-danger"
+             th:errors="*{productionYear}"></p>
+        </div>
+        <div class="form-group mb-3">
+          <label for="mileage" class="form-label">Mileage</label>
+          <input class="form-control" th:field="*{mileage}"
+                 type="text" id="mileage" name="mileage" placeholder="Enter Mileage">
+          <p th:if="${#fields.hasErrors('mileage')}" class="text-danger" th:errors="*{mileage}"></p>
+        </div>
+        <div class="form-group mb-3">
+          <p> Select Engine Type:
+            <select name="EngineType">
+              <option value=""
+                      th:each="engineType : ${T(com.vehicle_department.model.enums.EngineType).values()}"
+                      th:text="${engineType.displayText}"
+                      th:value="${engineType.name()}">
+              </option>
+            </select>
+          </p>
+        </div>
+        <div class="form-group mb-3">
+          <p> Select Gearbox Type:
+            <select name="GearboxType">
+              <option value=""
+                      th:each="gearboxType : ${T(com.vehicle_department.model.enums.GearboxType).values()}"
+                      th:text="${gearboxType.displayText}"
+                      th:value="${gearboxType.name()}">
+              </option>
+            </select>
+          </p>
+        </div>
+        <div class="form-group mb-3">
+          <label for="additionalInformation" class="form-label">Engine Additional Information</label>
+          <input class="form-control" th:field="*{additionalInformation}"
+                 type="text" id="additionalInformation" name="additionalInformation"
+                 placeholder="Enter Additional Information">
+          <p th:if="${#fields.hasErrors('additionalInformation')}" class="text-danger"
+             th:errors="*{additionalInformation}"></p>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-primary" type="submit">Save Vehicle</button>
+        </div>
+      </form>
+      <div class="mb-3">
+        <h5>
+          <a th:href="@{/vehicles/}">Proceed to Vehicle List</a>
+        </h5>
+      </div>
+      <div class="mb-3">
+        <h5>
+          <a href="">Back to Home</a>
+        </h5>
+      </div>
+      <div>
+        <h6>
+          * Editing Registration Number is not possible.
+          <br>
+          * In order to change Registration Number it is recommended to delete Vehicle and create new one.
+          <br>
+        </h6>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{fragments/head-content :: head-content}"></div>
+</head>
+<body>
+<nav th:replace="~{fragments/navigation :: nav}"></nav>
+<br>
+<div class="container">
+    <div class="text-center">
+        <h3>Vehicle Department Home Page</h3>
+    </div>
+    <hr>
+    <br>
+    <br>
+    <div class="text-center">
+        <a th:href="@{/vehicles/add-vehicle}">
+            <h3>Create New Vehicle</h3>
+        </a>
+    </div>
+    <br>
+    <div class="text-center">
+        <a th:href="@{/api/vehicle/frontend/}">
+            <h3>Vehicles List</h3>
+        </a>
+    </div>
+</div>
+</body>
+</html>

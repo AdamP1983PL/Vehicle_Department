@@ -43,7 +43,7 @@ class VehicleRepositoryTest {
     }
 
     @Test
-    @DisplayName("Testing findVehicleByVehicleIdentificationNumber(String vin) method.")
+    @DisplayName("Testing findVehicleByVehicleIdentificationNumber(String vin) query.")
     public void givenVinNumber_whenFindVehicleByVehicleIdentificationNumber_thenReturnVehicleObject() {
         // given
         String vin = vehicle1.getVehicleIdentificationNumber();
@@ -60,10 +60,10 @@ class VehicleRepositoryTest {
     }
 
     @Test
-    @DisplayName("Testing findVehicleByRegistrationNumber(String registrationNumber) method.")
+    @DisplayName("Testing findVehicleByRegistrationNumber(String registrationNumber) query.")
     public void givenRegistrationNumber_whenFindVehicleByRegistrationNumber_thenReturnVehicleObject() {
         // given
-        String registrationNumber = vehicle1.getRegistrationNumber();
+        String registrationNumber = "registration 1";
         vehicleRepository.save(vehicle1);
 
         // when
@@ -72,7 +72,7 @@ class VehicleRepositoryTest {
         // then
         assertAll(
                 () -> assertNotNull(testVehicle),
-                () -> assertEquals("vin 1", testVehicle.get().getVehicleIdentificationNumber())
+                () -> assertEquals("registration 1", testVehicle.get().getRegistrationNumber())
         );
     }
 

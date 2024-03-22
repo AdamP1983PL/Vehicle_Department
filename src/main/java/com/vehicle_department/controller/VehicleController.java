@@ -11,50 +11,60 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@AllArgsConstructor
 @RestController
-@RequestMapping("/api/vehicle")
 public class VehicleController {
 
-    private VehicleServiceImpl vehicleServiceImpl;
+    private final VehicleServiceImpl vehicleServiceImpl;
 
-    @GetMapping("/")
+    public VehicleController(VehicleServiceImpl vehicleServiceImpl) {
+        this.vehicleServiceImpl = vehicleServiceImpl;
+    }
+
+    @GetMapping("/api/vehicle")
     public ResponseEntity<List<VehicleDto>> findAllVehicles() {
         List<VehicleDto> vehicleDtoList = vehicleServiceImpl.findAllVehicles();
         log.info("====>>>> findAllVehicles() execution");
         return new ResponseEntity<>(vehicleDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/vin/{vin}")
+    @GetMapping("/api/vehicle/id/{id}")
+    public ResponseEntity<VehicleDto> findVehicleById(@PathVariable("id") Long id) {
+        VehicleDto vehicleDto = vehicleServiceImpl.findVehicleById(id);
+        log.info("====>>>> findVehicleById(" + id + ") execution.");
+        return new ResponseEntity<>(vehicleDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/vehicle/vin/{vin}")
     public ResponseEntity<VehicleDto> findVehicleByVIN(@PathVariable("vin") String vin) {
         VehicleDto vehicleDto = vehicleServiceImpl.findVehicleByVIN(vin);
         log.info("====>>>> findVehicleByVIN(" + vin + ") execution.");
         return new ResponseEntity<>(vehicleDto, HttpStatus.OK);
     }
 
-    @GetMapping("/reg-num/{number}")
+    @GetMapping("/api/vehicle/reg-num/{number}")
     public ResponseEntity<VehicleDto> findVehicleByRegistrationNumber(@PathVariable("number") String number) {
         VehicleDto vehicleDto = vehicleServiceImpl.findVehicleByRegistrationNumber(number);
         log.info("====>>>> findVehicleByRegistrationNumber(" + number + ") execution.");
         return new ResponseEntity<>(vehicleDto, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/api/vehicle/")
     public ResponseEntity<VehicleDto> createVehicle(@RequestBody VehicleDto vehicleDto) {
         VehicleDto createdVehicleDto = vehicleServiceImpl.createVehicle(vehicleDto);
         log.info("====>>>> createVehicle() execution.");
         return new ResponseEntity<>(createdVehicleDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{number}")
+    @PutMapping("/api/vehicle/{number}")
     public ResponseEntity<VehicleDto> updateVehicle(@RequestBody VehicleDto vehicleDto,
                                                     @PathVariable("number") String number) {
         VehicleDto updatedVehicleDto = vehicleServiceImpl.updateVehicle(vehicleDto, number);
-        log.info("====>>>> updateVehicle(" + number + ") execution.");
+        log.info("====>>>> updateVehicle(registration: " + number + ") execution.");
         return new ResponseEntity<>(updatedVehicleDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{number}")
+    // todo here added /delete
+    @DeleteMapping("/api/vehicle/delete/{number}")
     public ResponseEntity<Void> deleteVehicleByRegistrationNumber(@PathVariable("number") String number) {
         vehicleServiceImpl.deleteVehicleByRegistrationNumber(number);
         log.info("====>>>> deleteVehicleByRegistrationNumber(" + number + ") execution.");
