@@ -29,7 +29,7 @@ public class VehicleThymeleafController {
         return "index";
     }
 
-    @GetMapping("")
+    @GetMapping("/all-vehicles")
     public String listAllVehicles(Model model) {
         List<VehicleDto> vehicleDtoList = vehicleServiceImpl.findAllVehicles();
         model.addAttribute("vehicleDtoList", vehicleDtoList);
@@ -54,7 +54,7 @@ public class VehicleThymeleafController {
         }
         vehicleServiceImpl.createVehicle(vehicleDto);
         log.info("====>>>> saveNewVehicle() execution");
-        return "redirect:/vehicles/frontend/";
+        return "redirect:/vehicles/all-vehicles";
     }
 
     @GetMapping("/details/registration/{registration}")
@@ -84,14 +84,14 @@ public class VehicleThymeleafController {
         vehicleDto.setRegistrationNumber(registration);
         vehicleServiceImpl.mvcUpdateVehicle(vehicleDto);
         log.info("====>>>> updateVehicle() execution");
-        return "redirect:/vehicles";
+        return "redirect:/vehicles/all-vehicles";
     }
 
     @GetMapping("/delete/{registration}")
     public String deleteVehicle(@PathVariable("registration") String registration) {
         vehicleServiceImpl.deleteVehicleByRegistrationNumber(registration);
         log.info("====>>>> deleteVehicle(" + registration + ") execution");
-        return "redirect:/vehicles";
+        return "redirect:/vehicles/all-vehicles";
     }
 
 }
